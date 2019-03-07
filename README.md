@@ -2,8 +2,10 @@
 A new way to drive ws281x-controlled rgb-leds but not to tongle gpio with time-delay
 
 Thanks to @j3qq4hch.Your STM8_WS2812B project(https://github.com/j3qq4hch/STM8_WS2812B) shows the basic method of driving some amount of ws2812-controlled egb-leds.The core of the project is to tongle a STM8S's gpio with time delay,and it's in assembler.
+
 But I'm wondering it may not suit any mcu such as stm32 or even STM8L.
-And someday I found a new way.
+
+And some day I found a new way.
 
 The peripheral I use is the SPI1 in the stm32f103 mcu.
 
