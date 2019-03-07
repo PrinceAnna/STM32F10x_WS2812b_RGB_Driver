@@ -7,18 +7,8 @@ And someday I found a new way.
 
 The peripheral I use is the SPI1 in the stm32f103 mcu.
 
-The sending speed of ws2812's data is @ 800Kbps,same as 1.25us/1bit.
-To drive a ws2812b-controlled rgb-led, it need 24 continuous bits.But every bits only contains either of the two codes--0-code and 1-code.
+The sending speed of ws2812's data is @ 800Kbps,same as 1.25us/1bit.Data transfer time is TH+TL(=1.25μs±600ns).To drive a ws2812b-controlled rgb-led, it need 24 continuous bits.But every bits only contains alternate code of the two codes--0-code and 1-code.
 
-
-Data transfer time( TH+TL=1.25μs±600ns)  very inpotrant
-T0H       0 code ,high voltage time       0.35us      ±150ns
-T0L       0 code , low voltage time       0.8us       ±150ns
-T1H       1 code ,high voltage time       0.7us       ±150ns
-T1L       1 code ,low voltage time        0.6us       ±150ns
-RES       low voltage time                Above 50μ
-
-So I config the SPI1 run @ 9MHz,whitch means 0.89us/8bit@spi.Obviously，it's in the range of TH+TL.
-And I use 0xC0(0b11000000) instead of 0-code,0xFC(0b11111100) instead of 1-code.
+So I config the SPI1 run @ 9MHz,whitch means 0.89us/8bit@spi.Obviously，it's inside the range of TH+TL.And I use 0xC0(0b11000000) instead of 0-code,0xFC(0b11111100) instead of 1-code as the data in SPI->DR.
 
 Note: rainbowCycle(u16 Pixel_LEN) in the WS2812b.c is similar to @j3qq4hch's.
